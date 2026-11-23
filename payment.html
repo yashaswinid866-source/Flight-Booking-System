@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FLYLA Payment</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eaf7fc;
+            color: #123b62;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 90px;
+            background: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 12%;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .profile {
+            font-size: 14px;
+        }
+
+
+        /* PROGRESS */
+
+        .progress {
+            height: 120px;
+            background: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step span {
+            width: 30px;
+            height: 30px;
+
+            border-radius: 50%;
+
+            background: #14599b;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: auto;
+        }
+
+        .step p {
+            margin-top: 8px;
+        }
+
+        .line {
+            width: 180px;
+            height: 2px;
+
+            background: #487896;
+        }
+
+
+        /* MAIN */
+
+        main {
+            width: 1050px;
+            max-width: 90%;
+
+            margin: 45px auto;
+
+            display: grid;
+
+            grid-template-columns: 1.5fr 0.8fr;
+
+            gap: 25px;
+        }
+
+
+        /* LEFT */
+
+        .payment-section h2 {
+            font-size: 22px;
+        }
+
+        .payment-card {
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+        }
+
+
+        /* DROPDOWN */
+
+        .dropdown {
+            padding: 20px 0;
+
+            display: flex;
+            justify-content: space-between;
+
+            border-bottom: 1px solid #ddd;
+
+            font-weight: bold;
+        }
+
+
+        /* PAYMENT METHODS */
+
+        .payment-methods {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 30px 0;
+        }
+
+        .payment-methods label {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .payment-methods input {
+            width: 20px;
+            height: 20px;
+        }
+
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            margin-bottom: 7px;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 42px;
+
+            border: none;
+
+            background: #e5f4fa;
+
+            border-radius: 7px;
+
+            padding: 10px;
+
+            font-size: 16px;
+        }
+
+        .small-fields {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* TERMS */
+
+        .terms {
+            display: flex;
+
+            margin-top: 25px;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        .terms input {
+            width: 18px;
+            height: 18px;
+
+            margin-right: 10px;
+        }
+
+
+        /* BUTTON */
+
+        .book-btn {
+            float: right;
+
+            margin-top: 15px;
+
+            padding: 15px 50px;
+
+            border: none;
+            border-radius: 5px;
+
+            background: #ff5257;
+            color: white;
+
+            font-size: 16px;
+        }
+
+
+        /* RIGHT SIDE */
+
+        aside {
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .side-card {
+            border-radius: 15px;
+
+            padding: 20px;
+        }
+
+        .dark {
+            background: #07508e;
+            color: white;
+        }
+
+        .co2 {
+            background: #12c59b;
+            color: white;
+        }
+
+        .side-card h3 {
+            margin-top: 0;
+        }
+
+
+        /* CART */
+
+        .cart-row {
+            display: flex;
+            justify-content: space-between;
+
+            margin: 12px 0;
+
+            font-size: 13px;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 15px;
+        }
+
+        .side-card hr {
+            border: none;
+
+            border-top: 1px solid #ddd;
+        }
+
+
+        /* CO2 */
+
+        .co2 h2 {
+            font-size: 17px;
+        }
+
+        .co2 p {
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* FLIGHT */
+
+        .flight {
+            margin-top: 20px;
+        }
+
+        .flight small {
+            background: white;
+
+            color: #07508e;
+
+            padding: 4px 8px;
+
+            font-size: 9px;
+
+            font-weight: bold;
+        }
+
+        .flight h3 {
+            margin-bottom: 5px;
+        }
+
+        .flight p {
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            ✈ FLYLA
+        </div>
+
+        <div class="profile">
+            My profile &nbsp; 🌐
+        </div>
+
+    </header>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress">
+
+        <div class="step">
+
+            <span>✓</span>
+
+            <p>Search</p>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="step">
+
+            <span>✓</span>
+
+            <p>Reservation</p>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="step">
+
+            <span>3</span>
+
+            <p>Payment</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <!-- LEFT -->
+
+        <section class="payment-section">
+
+            <h2>Select payment method</h2>
+
+
+            <div class="payment-card">
+
+
+                <div class="dropdown">
+
+                    Do you have a discount code?
+
+                    <span>⌄</span>
+
+                </div>
+
+
+                <div class="payment-methods">
+
+                    <label>
+
+                        <input type="radio" name="payment">
+
+                        SOFORT transfer
+
+                    </label>
+
+
+                    <label>
+
+                        <input type="radio" name="payment" checked>
+
+                        💳 VISA &nbsp; 💳
+
+                    </label>
+
+
+                    <label>
+
+                        <input type="radio" name="payment">
+
+                        💳 PayPal
+
+                    </label>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Name on card</label>
+
+                    <input type="text">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Card number</label>
+
+                    <input type="text">
+
+                </div>
+
+
+                <div class="small-fields">
+
+
+                    <div class="form-group">
+
+                        <label>Expiration date</label>
+
+                        <input type="text" placeholder="MM/YY">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>CVC</label>
+
+                        <input type="text" placeholder="CVC">
+
+                    </div>
+
+                </div>
+
+
+                <div class="dropdown">
+
+                    Do you need an invoice?
+
+                    <span>⌄</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TERMS -->
+
+            <div class="terms">
+
+                <input type="checkbox">
+
+                <p>
+                    By clicking the "Book now" button I accept
+                    FLYLA's general terms and conditions and agree
+                    to the immediate execution of FLYLA's services.
+                    The same applies to the general terms and
+                    conditions including the cancellation conditions.
+                </p>
+
+            </div>
+
+            <a href="http://127.0.0.1:5500/index.html">
+            <button class="book-btn">
+                Book now
+            </button>
+            </a>
+        </section>
+
+
+
+        <!-- RIGHT -->
+
+        <aside>
+
+
+            <!-- CART -->
+
+            <div class="side-card dark">
+
+                <h3>Your cart</h3>
+
+                <div class="cart-row">
+
+                    <span>Tickets (1 passenger)</span>
+
+                    <b>€ 66</b>
+
+                </div>
+
+
+                <div class="cart-row">
+
+                    <span>Discount code</span>
+
+                    <b>- € 5</b>
+
+                </div>
+
+
+                <hr>
+
+
+                <div class="total">
+
+                    <span>Total (taxes included)</span>
+
+                    <b>€ 61</b>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CO2 -->
+
+            <div class="side-card co2">
+
+                <h3>CO2 emissions</h3>
+
+                <h2>457 kg CO2</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit.
+                    Maecenas venenatis dui.
+                </p>
+
+            </div>
+
+
+
+            <!-- ITINERARY -->
+
+            <div class="side-card dark">
+
+                <h3>Your itinerary</h3>
+
+
+                <div class="flight">
+
+                    <small>
+                        ✈ SELECTED DEPARTURE
+                    </small>
+
+                    <h3>
+                        Mon, 10 Oct 07:20 - 08:30
+                    </h3>
+
+                    <p>
+                        Munich Airport (MUC) -
+                        Duesseldorf Airport (DUS)
+                    </p>
+
+                </div>
+
+
+                <div class="flight">
+
+                    <small>
+                        ✈ SELECTED RETURN
+                    </small>
+
+                    <h3>
+                        Thu, 13 Oct 12:25 - 13:55
+                    </h3>
+
+                    <p>
+                        Duesseldorf Airport (DUS) -
+                        Munich Airport (MUC)
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FARE -->
+
+            <div class="side-card dark">
+
+                <h3>Your fare</h3>
+
+                <p>
+                    Main passenger (Amelia Earhart)
+                </p>
+
+            </div>
+
+
+        </aside>
+
+    </main>
+
+</body>
+
+</html>

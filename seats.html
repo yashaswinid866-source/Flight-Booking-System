@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Seats</title>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #eaf4fc;
+
+            color: #222;
+        }
+
+
+        /* HEADER */
+
+        .seat-header {
+            height: 60px;
+
+            background: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-bottom: 1px solid #ccc;
+
+            position: relative;
+        }
+
+
+        .seat-header h2 {
+            font-size: 20px;
+        }
+
+
+        .seat-header span {
+            position: absolute;
+
+            right: 25px;
+
+            font-size: 25px;
+        }
+
+
+        /* FLIGHT HEADER */
+
+        .flight-header {
+            height: 75px;
+
+            background: white;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            align-items: center;
+
+            text-align: center;
+
+            font-size: 17px;
+
+            font-weight: bold;
+        }
+
+
+        /* MAIN */
+
+        .seat-container {
+
+            width: 1100px;
+
+            max-width: 95%;
+
+            margin: 30px auto;
+
+            display: grid;
+
+            grid-template-columns: 380px 1fr;
+
+            gap: 70px;
+        }
+
+
+        /* LEGEND */
+
+        .legend {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 2px 10px #ccc;
+
+            height: fit-content;
+        }
+
+
+        .legend-item {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .box {
+
+            width: 25px;
+
+            height: 25px;
+
+            flex-shrink: 0;
+
+            border-radius: 4px;
+        }
+
+
+        .standard {
+            background: #42a95c;
+        }
+
+
+        .preferred {
+            background: #51bd68;
+        }
+
+
+        .extra {
+            background: #a9dfac;
+        }
+
+
+        .exit {
+            background: #73b5d5;
+        }
+
+
+        .front {
+            background: #82c1dc;
+        }
+
+
+        .unavailable {
+            background: #ddd;
+        }
+
+
+        .legend-item b {
+            font-size: 16px;
+        }
+
+
+        .legend-item strong {
+
+            float: right;
+
+            font-size: 14px;
+        }
+
+
+        .legend-item p {
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            color: #555;
+        }
+
+
+        /* SEAT MAP */
+
+        .seat-map {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            overflow: auto;
+        }
+
+
+        /* COLUMNS */
+
+        .columns {
+
+            display: grid;
+
+            grid-template-columns:
+                45px 45px 45px 45px 45px 45px 45px;
+
+            gap: 10px;
+
+            justify-content: center;
+
+            margin-bottom: 25px;
+
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+
+        /* ROW */
+
+        .seat-row {
+
+            display: grid;
+
+            grid-template-columns:
+                45px 45px 45px 45px 45px 45px 45px;
+
+            gap: 10px;
+
+            justify-content: center;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* SEATS */
+
+        .seat-row button {
+
+            width: 45px;
+
+            height: 45px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .standard-seat {
+            background: #51bd68;
+        }
+
+
+        .preferred-seat {
+            background: #54bd68;
+        }
+
+
+        .extra-seat {
+            background: #b3dfb2;
+        }
+
+
+        .front-seat {
+            background: #7dbddd;
+        }
+
+
+        /* UNAVAILABLE */
+
+        .seat-row .unavailable {
+
+            background: #ddd;
+
+            color: #aaa;
+
+            cursor: not-allowed;
+        }
+
+
+        /* ROW NUMBER */
+
+        .row-number {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 13px;
+        }
+
+
+        /* BUTTON */
+
+        .next-flight {
+
+            display: block;
+
+            margin: 35px 0 0 auto;
+
+            padding: 15px 45px;
+
+            border: none;
+
+            background: #008ed1;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        /* HOVER */
+
+        .seat-row button:not(.unavailable):hover {
+
+            transform: scale(1.08);
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <div class="seat-header">
+
+        <h2>Choose Seats</h2>
+
+        <span>✕</span>
+
+    </div>
+
+
+    <!-- FLIGHT -->
+
+    <div class="flight-header">
+
+        <div>
+            Los Angeles (LAX) → Denver (DEN)
+        </div>
+
+        <div>
+            John Schmoll
+        </div>
+
+    </div>
+
+
+
+    <!-- MAIN -->
+
+    <div class="seat-container">
+
+
+        <!-- LEGEND -->
+
+        <div class="legend">
+
+
+            <div class="legend-item">
+
+                <span class="box standard"></span>
+
+                <div>
+
+                    <b>Standard Seat</b>
+
+                    <strong>
+                        $16.00 - $21.00
+                    </strong>
+
+                    <p>
+                        Choose your favorite seat
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="legend-item">
+
+                <span class="box preferred"></span>
+
+                <div>
+
+                    <b>Preferred Seat</b>
+
+                    <strong>
+                        $21.00 - $26.00
+                    </strong>
+
+                    <p>
+                        Grab one of the most popular seats
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="legend-item">
+
+                <span class="box extra"></span>
+
+                <div>
+
+                    <b>Extra Legroom Seat</b>
+
+                    <strong>
+                        $33.00 - $34.00
+                    </strong>
+
+                    <p>
+                        Fly in comfort with extra legroom
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="legend-item">
+
+                <span class="box exit"></span>
+
+                <div>
+
+                    <b>Exit Row Seat</b>
+
+                    <strong>
+                        $26.00 - $30.00
+                    </strong>
+
+                    <p>
+                        Stretch out in the exit row
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="legend-item">
+
+                <span class="box front"></span>
+
+                <div>
+
+                    <b>Front Seat</b>
+
+                    <strong>
+                        $57.00
+                    </strong>
+
+                    <p>
+                        Sit in front and exit the plane first
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="legend-item">
+
+                <span class="box unavailable"></span>
+
+                <div>
+
+                    <b>Unavailable</b>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SEAT MAP -->
+
+        <div class="seat-map">
+
+
+            <div class="columns">
+
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+
+                <span></span>
+
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+
+            </div>
+
+
+
+            <!-- ROW 1 -->
+
+            <div class="seat-row">
+
+                <button class="front-seat">$57</button>
+
+                <button class="unavailable">X</button>
+
+                <button class="unavailable">X</button>
+
+                <span class="row-number">1</span>
+
+                <button class="front-seat">$57</button>
+
+                <button class="unavailable">X</button>
+
+                <button class="front-seat">$57</button>
+
+            </div>
+
+
+
+            <!-- ROW 2 -->
+
+            <div class="seat-row">
+
+                <button class="front-seat">$57</button>
+
+                <button class="unavailable">X</button>
+
+                <button class="front-seat">$57</button>
+
+                <span class="row-number">2</span>
+
+                <button class="front-seat">$57</button>
+
+                <button class="unavailable">X</button>
+
+                <button class="front-seat">$57</button>
+
+            </div>
+
+
+
+            <!-- ROW 3 -->
+
+            <div class="seat-row">
+
+                <button class="unavailable">X</button>
+
+                <button class="extra-seat">$33</button>
+
+                <button class="unavailable">X</button>
+
+                <span class="row-number">3</span>
+
+                <button class="extra-seat">$34</button>
+
+                <button class="extra-seat">$33</button>
+
+                <button class="unavailable">X</button>
+
+            </div>
+
+
+
+            <!-- ROW 4 -->
+
+            <div class="seat-row">
+
+                <button class="unavailable">X</button>
+
+                <button class="preferred-seat">$26</button>
+
+                <button class="unavailable">X</button>
+
+                <span class="row-number">4</span>
+
+                <button class="unavailable">X</button>
+
+                <button class="preferred-seat">$26</button>
+
+                <button class="unavailable">X</button>
+
+            </div>
+
+
+
+            <!-- ROW 5 -->
+
+            <div class="seat-row">
+
+                <button class="unavailable">X</button>
+
+                <button class="preferred-seat">$26</button>
+
+                <button class="standard-seat">$25</button>
+
+                <span class="row-number">5</span>
+
+                <button class="standard-seat">$25</button>
+
+                <button class="preferred-seat">$26</button>
+
+                <button class="standard-seat">$25</button>
+
+            </div>
+
+
+
+            <!-- ROW 6 -->
+
+            <div class="seat-row">
+
+                <button class="standard-seat">$25</button>
+
+                <button class="preferred-seat">$26</button>
+
+                <button class="standard-seat">$25</button>
+
+                <span class="row-number">6</span>
+
+                <button class="standard-seat">$25</button>
+
+                <button class="preferred-seat">$26</button>
+
+                <button class="standard-seat">$25</button>
+
+            </div>
+
+
+
+            <!-- ROW 7 -->
+
+            <div class="seat-row">
+
+                <button class="unavailable">X</button>
+
+                <button class="standard-seat">$22</button>
+
+                <button class="standard-seat">$21</button>
+
+                <span class="row-number">7</span>
+
+                <button class="unavailable">X</button>
+
+                <button class="unavailable">X</button>
+
+                <button class="unavailable">X</button>
+
+            </div>
+
+
+
+            <!-- ROW 8 -->
+
+            <div class="seat-row">
+
+                <button class="standard-seat">$21</button>
+
+                <button class="standard-seat">$22</button>
+
+                <button class="standard-seat">$21</button>
+
+                <span class="row-number">8</span>
+
+                <button class="unavailable">X</button>
+
+                <button class="unavailable">X</button>
+
+                <button class="unavailable">X</button>
+
+            </div>
+
+
+
+            <!-- ROW 9 -->
+
+            <div class="seat-row">
+
+                <button class="standard-seat">$21</button>
+
+                <button class="standard-seat">$22</button>
+
+                <button class="standard-seat">$21</button>
+
+                <span class="row-number">9</span>
+
+                <button class="standard-seat">$21</button>
+
+                <button class="unavailable">X</button>
+
+                <button class="unavailable">X</button>
+
+            </div>
+
+           <a href="http://127.0.0.1:5500/payment.html">
+
+            <button class="next-flight">
+                Next flight
+            </button>
+           </a>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

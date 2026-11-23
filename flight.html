@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flight Easy - Book Cheap Flights</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ================================
+           RESET
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: white;
+            background: #061b2b;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* ================================
+           HERO / BACKGROUND
+        ================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(3, 33, 55, 0.58),
+                    rgba(2, 23, 40, 0.75)
+                ),
+                url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=85");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+
+        /* ================================
+           NAVBAR
+        ================================= */
+
+        .navbar {
+            height: 58px;
+
+            background: linear-gradient(
+                90deg,
+                #0647b7,
+                #0065d9
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            font-size: 22px;
+            transform: rotate(-8deg);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            opacity: 0.95;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #69e9ff;
+        }
+
+        .language {
+            cursor: pointer;
+        }
+
+
+        /* ================================
+           MAIN CONTENT
+        ================================= */
+
+        .main-content {
+            width: 86%;
+            max-width: 1100px;
+
+            margin: auto;
+            padding: 22px 0 45px;
+        }
+
+
+        /* ================================
+           HERO TITLE
+        ================================= */
+
+        .hero-heading {
+            margin-bottom: 10px;
+        }
+
+        .hero-heading h1 {
+            font-size: 26px;
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 2px;
+        }
+
+        .hero-heading h1 span {
+            color: #00d9ff;
+        }
+
+        .hero-heading p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.88);
+        }
+
+
+        /* ================================
+           DEAL BANNER
+        ================================= */
+
+        .deal-banner {
+            margin-top: 16px;
+
+            min-height: 43px;
+
+            border-radius: 6px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #df5d34,
+                    #bc6b90,
+                    #246de0
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 7px 10px;
+
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .deal-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .deal-icon {
+            width: 28px;
+            height: 28px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.2);
+
+            font-size: 15px;
+        }
+
+        .deal-text strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .deal-text span {
+            display: block;
+            font-size: 8px;
+            margin-top: 2px;
+            opacity: 0.9;
+        }
+
+        .deal-button {
+            border: none;
+            background: white;
+            color: #1670c9;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            padding: 7px 11px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .deal-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+
+
+        /* ================================
+           SEARCH BOX
+        ================================= */
+
+        .search-box {
+            margin-top: 12px;
+
+            background: rgba(44, 70, 82, 0.68);
+
+            border: 1px solid rgba(255,255,255,0.25);
+
+            border-radius: 7px;
+
+            padding: 14px;
+
+            backdrop-filter: blur(8px);
+
+            box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+        }
+
+
+        /* ================================
+           TRIP TYPE
+        ================================= */
+
+        .trip-types {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+
+            font-size: 9px;
+
+            margin-bottom: 13px;
+        }
+
+        .trip-type {
+            cursor: pointer;
+            padding-bottom: 5px;
+
+            color: rgba(255,255,255,0.7);
+
+            border-bottom: 2px solid transparent;
+        }
+
+        .trip-type.active {
+            color: white;
+
+            background: linear-gradient(
+                90deg,
+                #00d5dc,
+                #00b9ff
+            );
+
+            padding: 5px 15px;
+
+            border-radius: 20px;
+        }
+
+
+        /* ================================
+           SEARCH GRID
+        ================================= */
+
+        .search-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.2fr
+                1.2fr
+                0.8fr
+                0.8fr;
+
+            gap: 10px;
+
+            position: relative;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field label {
+            font-size: 8px;
+            font-weight: 600;
+
+            color: rgba(255,255,255,0.9);
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+
+            height: 30px;
+
+            border: none;
+            outline: none;
+
+            border-radius: 3px;
+
+            background: rgba(255,255,255,0.18);
+
+            color: white;
+
+            padding: 0 10px;
+
+            font-size: 9px;
+        }
+
+        .field input::placeholder {
+            color: rgba(255,255,255,0.55);
+        }
+
+        .field select option {
+            color: #111;
+        }
+
+        .swap-button {
+            position: absolute;
+
+            left: 29%;
+
+            top: 26px;
+
+            width: 25px;
+            height: 25px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            background: #00bdd8;
+
+            color: white;
+
+            cursor: pointer;
+
+            z-index: 2;
+        }
+
+
+        /* ================================
+           EXTRA SEARCH OPTIONS
+        ================================= */
+
+        .search-options {
+            margin-top: 10px;
+
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            font-size: 8px;
+
+            color: rgba(255,255,255,0.85);
+        }
+
+        .search-options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-options input {
+            accent-color: #00d6f5;
+        }
+
+        .search-options .link {
+            margin-left: auto;
+            color: #69e9ff;
+            cursor: pointer;
+        }
+
+
+        /* ================================
+           SEARCH BUTTON
+        ================================= */
+
+        .search-button {
+            width: 100%;
+
+            height: 31px;
+
+            margin-top: 10px;
+
+            border: none;
+            border-radius: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00c5d7,
+                    #006eff
+                );
+
+            color: white;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .search-button:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 5px 15px rgba(0,150,255,0.3);
+        }
+
+
+        /* ================================
+           SECTION HEADER
+        ================================= */
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 13px;
+        }
+
+        .section-header a {
+            color: #00d8ff;
+            font-size: 9px;
+        }
+
+
+        /* ================================
+           DESTINATION CARDS
+        ================================= */
+
+        .destinations {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 11px;
+        }
+
+        .destination-card {
+            height: 117px;
+
+            position: relative;
+
+            border-radius: 6px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            background: #123;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: 0.4s;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.07);
+        }
+
+        .destination-card::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 35%,
+                    rgba(0,0,0,0.82)
+                );
+        }
+
+        .destination-info {
+            position: absolute;
+
+            bottom: 9px;
+            left: 10px;
+
+            z-index: 2;
+        }
+
+        .destination-info h3 {
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .destination-info p {
+            font-size: 8px;
+            color: rgba(255,255,255,0.9);
+        }
+
+
+        /* ================================
+           TRAVEL INSPIRATION
+        ================================= */
+
+        .inspiration-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+        }
+
+        .inspiration-card {
+            min-height: 62px;
+
+            display: flex;
+
+            background: rgba(30, 40, 45, 0.75);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 6px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .inspiration-card:hover {
+            transform: translateY(-2px);
+
+            background: rgba(40,55,60,0.9);
+        }
+
+        .inspiration-card img {
+            width: 60px;
+
+            object-fit: cover;
+        }
+
+        .inspiration-content {
+            padding: 8px 9px;
+        }
+
+        .inspiration-content h3 {
+            font-size: 8px;
+
+            margin-bottom: 4px;
+        }
+
+        .inspiration-content p {
+            font-size: 7px;
+
+            line-height: 1.35;
+
+            color: rgba(255,255,255,0.65);
+        }
+
+        .read-more {
+            display: block;
+
+            color: #00d8ff;
+
+            font-size: 7px;
+
+            margin-top: 4px;
+        }
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        footer {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0756c9,
+                    #003b9c
+                );
+
+            border-top: 2px solid #00c8ff;
+
+            padding: 25px 7% 12px;
+
+            margin-top: 10px;
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr
+                1fr
+                1fr
+                1.25fr;
+
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 15px;
+            font-weight: 800;
+
+            margin-bottom: 10px;
+        }
+
+        .footer-about {
+            font-size: 8px;
+
+            line-height: 1.6;
+
+            color: rgba(255,255,255,0.72);
+
+            max-width: 220px;
+        }
+
+        .social-icons {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 12px;
+        }
+
+        .social-icons span {
+            width: 20px;
+            height: 20px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.15);
+
+            font-size: 9px;
+        }
+
+        .footer-column h3 {
+            font-size: 9px;
+
+            margin-bottom: 9px;
+        }
+
+        .footer-column a {
+            display: block;
+
+            color: rgba(255,255,255,0.72);
+
+            font-size: 8px;
+
+            margin-bottom: 7px;
+
+            transition: 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+
+        /* ================================
+           NEWSLETTER
+        ================================= */
+
+        .newsletter p {
+            font-size: 7px;
+
+            color: rgba(255,255,255,0.72);
+
+            margin-bottom: 7px;
+        }
+
+        .newsletter-form {
+            display: flex;
+
+            gap: 5px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+
+            height: 25px;
+
+            border: none;
+
+            outline: none;
+
+            border-radius: 4px;
+
+            background: rgba(255,255,255,0.12);
+
+            color: white;
+
+            padding: 0 8px;
+
+            font-size: 8px;
+        }
+
+        .newsletter-form button {
+            height: 25px;
+
+            border: none;
+
+            border-radius: 4px;
+
+            padding: 0 10px;
+
+            color: white;
+
+            background: #00bce8;
+
+            font-size: 8px;
+
+            cursor: pointer;
+        }
+
+
+        /* ================================
+           APP BUTTONS
+        ================================= */
+
+        .app-title {
+            font-size: 7px;
+
+            margin-top: 12px;
+
+            margin-bottom: 6px;
+        }
+
+        .app-buttons {
+            display: flex;
+
+            gap: 5px;
+        }
+
+        .app-button {
+            padding: 5px 9px;
+
+            background: black;
+
+            border-radius: 4px;
+
+            font-size: 7px;
+        }
+
+
+        /* ================================
+           PAYMENT
+        ================================= */
+
+        .footer-bottom {
+            max-width: 1100px;
+
+            margin: 22px auto 0;
+
+            border-top: 1px solid rgba(255,255,255,0.13);
+
+            padding-top: 13px;
+        }
+
+        .payment-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .payment-methods {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+        }
+
+        .payment-methods span {
+            background: white;
+
+            color: #333;
+
+            border-radius: 2px;
+
+            padding: 3px 5px;
+
+            font-size: 6px;
+
+            font-weight: 700;
+        }
+
+        .security {
+            font-size: 7px;
+
+            color: #72ffb1;
+        }
+
+        .copyright {
+            margin-top: 13px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: rgba(255,255,255,0.55);
+
+            font-size: 7px;
+        }
+
+        .copyright-links {
+            display: flex;
+            gap: 14px;
+        }
+
+
+        /* ================================
+           CHAT BUTTON
+        ================================= */
+
+        .chat-button {
+            position: fixed;
+
+            right: 18px;
+            bottom: 18px;
+
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+
+            border: 2px solid rgba(255,255,255,0.4);
+
+            background: #0078e8;
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            font-size: 17px;
+
+            cursor: pointer;
+
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+
+        /* ================================
+           RESPONSIVE DESIGN
+        ================================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a:nth-child(3),
+            .nav-links a:nth-child(4) {
+                display: none;
+            }
+
+            .main-content {
+                width: 90%;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .swap-button {
+                left: calc(50% - 12px);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: 52px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .nav-links {
+                gap: 8px;
+                font-size: 9px;
+            }
+
+            .nav-links a:nth-child(1),
+            .nav-links a:nth-child(2) {
+                display: none;
+            }
+
+            .hero {
+                background-attachment: scroll;
+            }
+
+            .hero-heading h1 {
+                font-size: 21px;
+            }
+
+            .hero-heading p {
+                font-size: 10px;
+            }
+
+            .deal-banner {
+                min-height: 50px;
+            }
+
+            .deal-text strong {
+                font-size: 9px;
+            }
+
+            .deal-text span {
+                font-size: 7px;
+            }
+
+            .deal-button {
+                font-size: 7px;
+                padding: 6px 8px;
+            }
+
+            .search-box {
+                padding: 12px 10px;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .swap-button {
+                left: auto;
+                right: 10px;
+                top: 42px;
+            }
+
+            .search-options {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .search-options .link {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .destinations {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .destination-card {
+                height: 130px;
+            }
+
+            .inspiration-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px 15px;
+            }
+
+            .payment-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .copyright {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+
+        @media (max-width: 400px) {
+
+            .destinations {
+                grid-template-columns: 1fr;
+            }
+
+            .destination-card {
+                height: 160px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-heading h1 {
+                font-size: 19px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section class="hero">
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="#" class="logo">
+            <span class="logo-icon">✈</span>
+            <span>Flight Easy</span>
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="#">
+                🏠 Home
+            </a>
+
+            <a href="#search">
+                🔍 Search
+            </a>
+
+            <a href="#">
+                ℹ Info
+            </a>
+
+            <a href="#">
+                ↪ Login
+            </a>
+
+            <a href="#">
+                👤 Register
+            </a>
+
+            <a href="#" class="language">
+                🌐 EN
+            </a>
+
+            <a href="#">
+                ☰
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+
+        <!-- TITLE -->
+
+        <div class="hero-heading">
+
+            <h1>
+                <span>✈</span>
+                Flight Easy
+            </h1>
+
+            <p>
+                Find and book flights at the cheapest rates.
+            </p>
+
+        </div>
+
+
+
+        <!-- DEAL BANNER -->
+
+        <div class="deal-banner">
+
+            <div class="deal-content">
+
+                <div class="deal-icon">
+                    ✈
+                </div>
+
+                <div class="deal-text">
+
+                    <strong>
+                        Summer Sale!
+                    </strong>
+
+                    <span>
+                        Save up to 33% on selected routes
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="deal-button"
+                onclick="showDeal()">
+
+                View Deals
+
+            </button>
+
+        </div>
+
+
+
+        <!-- SEARCH BOX -->
+
+        <section
+            class="search-box"
+            id="search">
+
+
+            <!-- TRIP TYPE -->
+
+            <div class="trip-types">
+
+                <div
+                    class="trip-type active"
+                    onclick="setTripType(this, 'oneway')">
+
+                    One-way
+
+                </div>
+
+                <div
+                    class="trip-type"
+                    onclick="setTripType(this, 'roundtrip')">
+
+                    Round-trip
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="flightForm">
+
+
+                <div class="search-grid">
+
+
+                    <!-- FROM -->
+
+                    <div class="field">
+
+                        <label>
+                            ✈ From
+                        </label>
+
+                        <input
+                            type="text"
+                            id="from"
+                            placeholder="City or Airport"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- TO -->
+
+                    <div class="field">
+
+                        <label>
+                            📍 To
+                        </label>
+
+                        <input
+                            type="text"
+                            id="to"
+                            placeholder="City or Airport"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- DEPARTURE -->
+
+                    <div class="field">
+
+                        <label>
+                            📅 Departure
+                        </label>
+
+                        <input
+                            type="date"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- PASSENGERS -->
+
+                    <div class="field">
+
+                        <label>
+                            👤 Passengers
+                        </label>
+
+                        <input
+                            type="number"
+                            value="1"
+                            min="1"
+                            max="20"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- SWAP -->
+
+                    <button
+                        type="button"
+                        class="swap-button"
+                        onclick="swapCities()">
+
+                        ↔
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div class="search-options">
+
+                    <label>
+                        <input type="checkbox" required>
+                        Direct flights only
+                    </label>
+
+                    <label>
+                        <input type="checkbox" required>
+                        Flexible dates (±3 days)
+                    </label>
+
+                    <span
+                        class="link"
+                        onclick="showMessage('Price calendar coming soon!')">
+
+                        💰 See Price Calendar
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- SEARCH -->
+            
+                <a href="http://127.0.0.1:5500/flight%20results.html">
+    <button
+        type="button"
+        class="search-button">
+        🔍 Search Flights
+    </button>
+</a>
+                
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ===============================
+             POPULAR DESTINATIONS
+        ================================= -->
+
+        <div class="section-header">
+
+            <h2>
+                Popular Destinations
+            </h2>
+
+            <a href="#">
+                View All
+            </a>
+
+        </div>
+
+
+
+        <div class="destinations">
+
+
+            <!-- PARIS -->
+
+            <div
+                class="destination-card"
+                onclick="selectDestination('Paris, France')">
+
+                <img
+                    src="paris.jpeg"
+                    alt="Paris">
+
+                <div class="destination-info">
+
+                    <h3>
+                        Paris, France
+                    </h3>
+
+                    <p>
+                        From $399 &nbsp; • &nbsp; ⭐ 4.9
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOKYO -->
+
+            <div
+                class="destination-card"
+                onclick="selectDestination('Tokyo, Japan')">
+
+                <img
+                    src="tokyo.jpeg"
+                    alt="Tokyo">
+
+                <div class="destination-info">
+
+                    <h3>
+                        Tokyo, Japan
+                    </h3>
+
+                    <p>
+                        From $599 &nbsp; • &nbsp; ⭐ 4.8
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NEW YORK -->
+
+            <div
+                class="destination-card"
+                onclick="selectDestination('New York, USA')">
+
+                <img
+                    src="new york.jpeg"
+                    alt="New York">
+
+                <div class="destination-info">
+
+                    <h3>
+                        New York, USA
+                    </h3>
+
+                    <p>
+                        From $449 &nbsp; • &nbsp; ⭐ 4.7
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BALI -->
+
+            <div
+                class="destination-card"
+                onclick="selectDestination('Bali, Indonesia')">
+
+                <img
+                    src="bali.jpeg"
+                    alt="Bali">
+
+                <div class="destination-info">
+
+                    <h3>
+                        Bali, Indonesia
+                    </h3>
+
+                    <p>
+                        From $399 &nbsp; • &nbsp; ⭐ 4.8
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DUBAI -->
+
+            <div
+                class="destination-card"
+                onclick="selectDestination('Dubai, UAE')">
+
+                <img
+                    src="dubai.jpeg"
+                    alt="Dubai">
+
+                <div class="destination-info">
+
+                    <h3>
+                        Dubai, UAE
+                    </h3>
+
+                    <p>
+                        From $499 &nbsp; • &nbsp; ⭐ 4.8
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SYDNEY -->
+
+            <div
+                class="destination-card"
+                onclick="selectDestination('Sydney, Australia')">
+
+                <img
+                    src="sydney.jpeg"
+                    alt="Sydney">
+
+                <div class="destination-info">
+
+                    <h3>
+                        Sydney, Australia
+                    </h3>
+
+                    <p>
+                        From $699 &nbsp; • &nbsp; ⭐ 4.8
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ===============================
+             TRAVEL INSPIRATION
+        ================================= -->
+
+        <div class="section-header">
+
+            <h2>
+                Travel Inspiration
+            </h2>
+
+        </div>
+
+
+
+        <div class="inspiration-grid">
+
+
+            <!-- CARD 1 -->
+
+            <div class="inspiration-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80"
+                    alt="Europe">
+
+                <div class="inspiration-content">
+
+                    <h3>
+                        Top 10 Hidden Gems in Europe
+                    </h3>
+
+                    <p>
+                        Discover lesser-known destinations
+                        that offer incredible experiences
+                        without the crowds.
+                    </p>
+
+                    <span class="read-more">
+                        Read More →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 2 -->
+
+            <div class="inspiration-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=300&q=80"
+                    alt="Flight">
+
+                <div class="inspiration-content">
+
+                    <h3>
+                        How to Find Cheap Flights
+                    </h3>
+
+                    <p>
+                        Expert tips and tricks to save money
+                        on your next flight booking.
+                    </p>
+
+                    <span class="read-more">
+                        Read More →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 3 -->
+
+            <div class="inspiration-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=300&q=80"
+                    alt="Southeast Asia">
+
+                <div class="inspiration-content">
+
+                    <h3>
+                        Best Time to Visit Southeast Asia
+                    </h3>
+
+                    <p>
+                        Plan your trip with our seasonal
+                        guide to weather and festivals.
+                    </p>
+
+                    <span class="read-more">
+                        Read More →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CARD 4 -->
+
+            <div class="inspiration-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=300&q=80"
+                    alt="Business Travel">
+
+                <div class="inspiration-content">
+
+                    <h3>
+                        Business Travel Packing Guide
+                    </h3>
+
+                    <p>
+                        Essential items and packing strategies
+                        for efficient business trips.
+                    </p>
+
+                    <span class="read-more">
+                        Read More →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</section>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+
+    <div class="footer-grid">
+
+
+        <!-- ABOUT -->
+
+        <div>
+
+            <div class="footer-logo">
+                ✈ Flight Easy
+            </div>
+
+            <p class="footer-about">
+
+                Your trusted travel partner for seamless
+                flight bookings and exceptional travel
+                experiences worldwide. Find the cheapest
+                rates with ease and book your dream trip
+                today.
+
+            </p>
+
+
+            <div class="social-icons">
+
+                <span>f</span>
+                <span>𝕏</span>
+                <span>◎</span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- QUICK LINKS -->
+
+        <div class="footer-column">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="#">
+                › About Us
+            </a>
+
+            <a href="#">
+                › Our Services
+            </a>
+
+            <a href="#">
+                › Popular Destinations
+            </a>
+
+            <a href="#">
+                › Special Deals
+            </a>
+
+            <a href="#">
+                › Careers
+            </a>
+
+            <a href="#">
+                › Travel Blog
+            </a>
+
+        </div>
+
+
+
+        <!-- SUPPORT -->
+
+        <div class="footer-column">
+
+            <h3>
+                Support
+            </h3>
+
+            <a href="#">
+                › Contact Us
+            </a>
+
+            <a href="#">
+                › FAQ
+            </a>
+
+            <a href="#">
+                › Booking Guide
+            </a>
+
+            <a href="#">
+                › Baggage Information
+            </a>
+
+            <a href="#">
+                › Privacy Policy
+            </a>
+
+            <a href="#">
+                › Terms of Service
+            </a>
+
+        </div>
+
+
+
+        <!-- NEWSLETTER -->
+
+        <div class="newsletter">
+
+            <div class="footer-column">
+
+                <h3>
+                    Stay Updated
+                </h3>
+
+            </div>
+
+            <p>
+                Subscribe to our newsletter for exclusive
+                deals and travel tips.
+            </p>
+
+
+            <form
+                class="newsletter-form"
+                onsubmit="subscribe(event)">
+
+                <input
+                    type="email"
+                    placeholder="Your email address"
+                    required>
+
+                <button>
+                    Subscribe
+                </button>
+
+            </form>
+
+
+            <div class="app-title">
+                Download our app
+            </div>
+
+
+            <div class="app-buttons">
+
+                <div class="app-button">
+                     App Store
+                </div>
+
+                <div class="app-button">
+                    ▶ Google Play
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-bottom">
+
+
+        <div class="payment-row">
+
+
+            <div>
+
+                <div
+                    style="
+                    font-size:7px;
+                    margin-bottom:6px;
+                    color:rgba(255,255,255,.65);
+                    ">
+
+                    We accept all major payment methods:
+
+                </div>
+
+
+                <div class="payment-methods">
+
+                    <span>VISA</span>
+                    <span>MC</span>
+                    <span>AMEX</span>
+                    <span>UPI</span>
+                    <span>GPay</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="security">
+
+                🔒 Secure Payments &nbsp; ✓ Verified
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="copyright">
+
+            <span>
+                © 2025 Flight Easy. All rights reserved.
+            </span>
+
+            <div class="copyright-links">
+
+                <a href="#">
+                    Sitemap
+                </a>
+
+                <a href="#">
+                    Accessibility
+                </a>
+
+                <a href="#">
+                    Cookie Policy
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- CHAT BUTTON -->
+
+<div
+    class="chat-button"
+    onclick="showMessage('Hello! How can we help you?')">
+
+    💬
+
+</div>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+
+    /* ================================
+       TRIP TYPE
+    ================================= */
+
+    function setTripType(element, type) {
+
+        document
+            .querySelectorAll(".trip-type")
+            .forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+        element.classList.add("active");
+
+        if (type === "roundtrip") {
+
+            showMessage(
+                "Round-trip selected. Return date can be added here."
+            );
+
+        }
+
+    }
+
+
+
+    /* ================================
+       SWAP CITIES
+    ================================= */
+
+    function swapCities() {
+
+        const from =
+            document.getElementById("from");
+
+        const to =
+            document.getElementById("to");
+
+        const temp = from.value;
+
+        from.value = to.value;
+
+        to.value = temp;
+
+    }
+
+
+
+    /* ================================
+       SEARCH FORM
+    ================================= */
+
+    document
+        .getElementById("flightForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const from =
+                document.getElementById("from").value;
+
+            const to =
+                document.getElementById("to").value;
+
+            if (!from || !to) {
+
+                showMessage(
+                    "Please enter your departure and destination."
+                );
+
+                return;
+
+            }
+
+            showMessage(
+                "Searching flights from " +
+                from +
+                " to " +
+                to +
+                "..."
+            );
+
+        });
+
+
+
+    /* ================================
+       DESTINATION
+    ================================= */
+
+    function selectDestination(destination) {
+
+        document
+            .getElementById("to")
+            .value = destination;
+
+        document
+            .getElementById("search")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+
+    /* ================================
+       DEAL
+    ================================= */
+
+    function showDeal() {
+
+        showMessage(
+            "Summer Sale: Save up to 33% on selected routes!"
+        );
+
+    }
+
+
+
+    /* ================================
+       NEWSLETTER
+    ================================= */
+
+    function subscribe(event) {
+
+        event.preventDefault();
+
+        showMessage(
+            "Thank you for subscribing to Flight Easy!"
+        );
+
+        event.target.reset();
+
+    }
+
+
+
+    /* ================================
+       MESSAGE
+    ================================= */
+
+    function showMessage(message) {
+
+        alert(message);
+
+    }
+
+</script>
+
+
+</body>
+</html>

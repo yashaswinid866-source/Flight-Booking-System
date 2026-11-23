@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flight Easy - E-Ticket</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f6fd;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        .header {
+            height: 70px;
+            background-color: #10469a;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 10%;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .ticket-title {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+
+        /* MAIN TICKET */
+
+        .ticket {
+            width: 850px;
+            margin: 50px auto;
+
+            background-color: white;
+
+            border-radius: 14px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+            overflow: hidden;
+        }
+
+
+        /* TOP SECTION */
+
+        .ticket-top {
+            background-color: #10469a;
+            color: white;
+
+            padding: 25px 35px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-top h1 {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .ticket-top p {
+            font-size: 14px;
+        }
+
+        .status {
+            background-color: #d8f8e8;
+            color: #008c55;
+
+            padding: 9px 15px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+
+        /* FLIGHT DETAILS */
+
+        .flight-info {
+            padding: 35px 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .airport {
+            text-align: center;
+            width: 150px;
+        }
+
+        .airport p {
+            font-size: 12px;
+            color: #777777;
+            font-weight: bold;
+        }
+
+        .airport h2 {
+            font-size: 40px;
+            color: #10469a;
+
+            margin: 6px 0;
+        }
+
+        .airport span {
+            font-size: 14px;
+            color: #555555;
+        }
+
+
+        /* FLIGHT ROUTE */
+
+        .flight-route {
+            width: 300px;
+            text-align: center;
+        }
+
+        .line {
+            height: 2px;
+            background-color: #bfc8d5;
+
+            width: 100px;
+
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .plane {
+            display: inline-block;
+
+            font-size: 22px;
+
+            color: #0d78df;
+
+            margin: 0 8px;
+        }
+
+        .flight-route p {
+            font-size: 12px;
+            color: #777777;
+
+            margin-top: 10px;
+        }
+
+
+        /* PASSENGER DETAILS */
+
+        .details {
+            padding: 30px 50px;
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 25px;
+        }
+
+        .detail-box p {
+            color: #777777;
+
+            font-size: 11px;
+
+            margin-bottom: 7px;
+        }
+
+        .detail-box h3 {
+            font-size: 14px;
+
+            color: #222222;
+        }
+
+
+        /* DIVIDER */
+
+        .dashed-line {
+            border-top: 2px dashed #cbd2dc;
+
+            margin: 0 35px;
+        }
+
+
+        /* BOTTOM */
+
+        .bottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 30px 50px 35px;
+        }
+
+        .instructions {
+            width: 60%;
+        }
+
+        .instructions h3 {
+            color: #10469a;
+
+            font-size: 16px;
+
+            margin-bottom: 12px;
+        }
+
+        .instructions ul {
+            padding-left: 18px;
+        }
+
+        .instructions li {
+            font-size: 12px;
+
+            color: #666666;
+
+            margin-bottom: 7px;
+        }
+
+
+        /* BARCODE */
+
+        .barcode-section {
+            text-align: center;
+
+            width: 230px;
+        }
+
+        .barcode {
+            font-size: 28px;
+
+            letter-spacing: 3px;
+
+            color: #111111;
+
+            margin-bottom: 8px;
+        }
+
+        .barcode-section p {
+            font-size: 12px;
+
+            color: #555555;
+        }
+
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+        .home-btn,
+        .print-btn {
+            padding: 12px 22px;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .home-btn {
+            background-color: #0d78df;
+
+            color: white;
+        }
+
+        .print-btn {
+            background-color: #00b96b;
+
+            color: white;
+
+            border: none;
+        }
+
+        .home-btn:hover {
+            background-color: #0965bd;
+        }
+
+        .print-btn:hover {
+            background-color: #009957;
+        }
+
+
+        /* FOOTER */
+
+        .footer-text {
+            text-align: center;
+
+            color: #777777;
+
+            font-size: 13px;
+
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+
+        /* PRINT */
+
+        @media print {
+
+            body {
+                background-color: white;
+            }
+
+            .header {
+                display: none;
+            }
+
+            .ticket {
+                width: 100%;
+
+                margin: 0;
+
+                box-shadow: none;
+            }
+
+            .buttons,
+            .footer-text {
+                display: none;
+            }
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .ticket {
+                width: 92%;
+            }
+
+            .header {
+                padding: 0 5%;
+            }
+
+            .flight-info {
+                padding: 25px;
+            }
+
+            .details {
+                grid-template-columns: repeat(2, 1fr);
+
+                padding: 25px;
+            }
+
+            .bottom {
+                padding: 25px;
+
+                flex-direction: column;
+            }
+
+            .instructions {
+                width: 100%;
+            }
+
+            .barcode-section {
+                width: 100%;
+
+                margin-top: 25px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">
+            ✈ Flight Easy
+        </div>
+
+        <div class="ticket-title">
+            E-TICKET
+        </div>
+
+    </div>
+
+
+    <!-- TICKET -->
+
+    <div class="ticket">
+
+        <!-- TOP -->
+
+        <div class="ticket-top">
+
+            <div>
+                <h1>Flight Easy</h1>
+
+                <p>
+                    Electronic Air Ticket
+                </p>
+            </div>
+
+            <div class="status">
+                ✓ CONFIRMED
+            </div>
+
+        </div>
+
+
+        <!-- FLIGHT ROUTE -->
+
+        <div class="flight-info">
+
+            <div class="airport">
+
+                <p>FROM</p>
+
+                <h2>BLR</h2>
+
+                <span>
+                    Bengaluru
+                </span>
+
+            </div>
+
+
+            <div class="flight-route">
+
+                <div class="line"></div>
+
+                <span class="plane">
+                    ✈
+                </span>
+
+                <div class="line"></div>
+
+                <p>
+                    Direct Flight
+                </p>
+
+            </div>
+
+
+            <div class="airport">
+
+                <p>TO</p>
+
+                <h2>DEL</h2>
+
+                <span>
+                    New Delhi
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- DETAILS -->
+
+        <div class="details">
+
+            <div class="detail-box">
+
+                <p>PASSENGER NAME</p>
+
+                <h3>
+                    XYZ
+                </h3>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <p>BOOKING ID</p>
+
+                <h3>
+                    66F2B759
+                </h3>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <p>FLIGHT</p>
+
+                <h3>
+                    FE 2026
+                </h3>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <p>DATE</p>
+
+                <h3>
+                    01 OCT 2026
+                </h3>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <p>DEPARTURE</p>
+
+                <h3>
+                    10:30 AM
+                </h3>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <p>ARRIVAL</p>
+
+                <h3>
+                    01:15 PM
+                </h3>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <p>SEAT</p>
+
+                <h3>
+                    12A
+                </h3>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <p>CLASS</p>
+
+                <h3>
+                    ECONOMY
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- DIVIDER -->
+
+        <div class="dashed-line"></div>
+
+
+        <!-- BOTTOM -->
+
+        <div class="bottom">
+
+            <div class="instructions">
+
+                <h3>
+                    Important Information
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Please arrive at the airport at least 2 hours before departure.
+                    </li>
+
+                    <li>
+                        Carry a valid government-issued ID.
+                    </li>
+
+                    <li>
+                        Check your baggage allowance before travelling.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="barcode-section">
+
+                <div class="barcode">
+                    || ||| |||| | || ||| || ||||
+                </div>
+
+                <p>
+                    66F2B759
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+        <a href="flight.html" class="home-btn">
+            ← Go to Home
+        </a>
+
+        <button class="print-btn" onclick="window.print()">
+            🖨 Print Ticket
+        </button>
+
+    </div>
+
+
+    <p class="footer-text">
+        Thank you for choosing Flight Easy ✈
+    </p>
+
+
+</body>
+</html>

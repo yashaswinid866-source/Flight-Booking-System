@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Passenger Details - Flight Easy</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #172b4d;
+        }
+
+        /* =========================
+           TOP NAVBAR
+        ========================= */
+
+        .topbar {
+            height: 58px;
+            background: #062c57;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: #39a9ff;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-size: 13px;
+        }
+
+        .nav-item {
+            color: #d9e8f7;
+        }
+
+        .nav-item.active {
+            color: white;
+            font-weight: bold;
+        }
+
+        .home-button {
+            background: #1685ed;
+            border-radius: 5px;
+            padding: 7px 13px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        /* =========================
+           PAGE CONTAINER
+        ========================= */
+
+        .container {
+            width: 94%;
+            max-width: 1250px;
+            margin: 25px auto 50px;
+        }
+
+        /* =========================
+           TOP TRIP SUMMARY
+        ========================= */
+
+        .trip-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .trip-summary {
+            background: white;
+            border: 1px solid #d9e0e8;
+            border-radius: 6px;
+            padding: 9px 18px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            font-size: 12px;
+        }
+
+        .trip-route {
+            font-weight: bold;
+            font-size: 13px;
+            color: #1b2f4b;
+        }
+
+        .trip-info {
+            color: #65758b;
+        }
+
+        /* =========================
+           MAIN LAYOUT
+        ========================= */
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        /* =========================
+           PASSENGER SECTION
+        ========================= */
+
+        .passenger-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e1e7ee;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .page-title {
+            margin-bottom: 4px;
+            font-size: 22px;
+            color: #1b3553;
+        }
+
+        .page-subtitle {
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           PASSENGER CARD
+        ========================= */
+
+        .passenger-card {
+            border: 1px solid #dce3eb;
+            border-radius: 8px;
+            padding: 17px;
+            background: #ffffff;
+        }
+
+        .passenger-heading {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 20px;
+        }
+
+        .passenger-heading h2 {
+            font-size: 15px;
+            color: #263d59;
+        }
+
+        .adult-label {
+            background: #e7f3ff;
+            color: #1685ed;
+            border-radius: 10px;
+            padding: 3px 8px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row.three {
+            grid-template-columns: 0.7fr 1.3fr 1.3fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 10px;
+            color: #55657a;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            height: 38px;
+            border: 1px solid #d5dce5;
+            border-radius: 5px;
+            padding: 0 11px;
+            font-size: 12px;
+            color: #25374e;
+            outline: none;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #1685ed;
+        }
+
+        .form-group input::placeholder {
+            color: #a5afbb;
+        }
+
+        /* =========================
+           CONFIRM BUTTON
+        ========================= */
+
+        .confirm-button {
+            width: 100%;
+            height: 42px;
+            margin-top: 20px;
+
+            border: none;
+            border-radius: 5px;
+
+            background: #1685ed;
+            color: white;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .confirm-button:hover {
+            background: #096fcf;
+        }
+
+        /* =========================
+           FLIGHT SUMMARY
+        ========================= */
+
+        .summary-section {
+            background: white;
+            border: 1px solid #e1e7ee;
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .summary-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            margin-bottom: 18px;
+            color: #203954;
+        }
+
+        .summary-icon {
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            background: #e5f3ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1685ed;
+        }
+
+        /* =========================
+           FLIGHT CARD
+        ========================= */
+
+        .flight-card {
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .airline {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #1f4065;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .airline-icon {
+            color: #1685ed;
+        }
+
+        .flight-route {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .city h3 {
+            font-size: 13px;
+            margin-bottom: 4px;
+            color: #253d5b;
+        }
+
+        .city p {
+            font-size: 9px;
+            color: #7b8797;
+            line-height: 1.5;
+        }
+
+        .city.right {
+            text-align: right;
+        }
+
+        .arrow {
+            color: #8a98a9;
+            font-size: 16px;
+        }
+
+        .flight-duration {
+            border-top: 1px solid #edf0f4;
+            margin-top: 12px;
+            padding-top: 9px;
+
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 9px;
+            color: #738095;
+        }
+
+        /* =========================
+           TOTAL PRICE
+        ========================= */
+
+        .total-box {
+            margin-top: 16px;
+            background: #eaf5ff;
+            border-radius: 7px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .total-label {
+            font-size: 10px;
+            color: #60758c;
+            margin-bottom: 5px;
+        }
+
+        .total-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #174879;
+        }
+
+        .passenger-count {
+            font-size: 9px;
+            color: #6d7d91;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           SECURITY NOTE
+        ========================= */
+
+        .secure-note {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 9px;
+            color: #758399;
+        }
+
+        .secure-note span {
+            color: #159447;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-section {
+                order: 2;
+            }
+
+            .passenger-section {
+                order: 1;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+                margin-top: 15px;
+            }
+
+            .trip-summary {
+                width: 100%;
+                justify-content: center;
+                gap: 10px;
+                padding: 8px;
+            }
+
+            .trip-info {
+                font-size: 9px;
+            }
+
+            .trip-route {
+                font-size: 11px;
+            }
+
+            .passenger-section {
+                padding: 13px;
+            }
+
+            .passenger-card {
+                padding: 12px;
+            }
+
+            .form-row,
+            .form-row.three {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .page-title {
+                font-size: 19px;
+            }
+
+            .summary-section {
+                padding: 13px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOP NAVIGATION
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="logo">
+            ✈ <span>Flight</span> Easy
+        </div>
+
+        <div class="nav-center">
+
+            <div class="nav-item active">
+                Passenger Details
+            </div>
+
+            <div class="nav-item">
+                Payment
+            </div>
+
+            <div class="nav-item">
+                Confirmation
+            </div>
+
+        </div>
+
+        <a href="flight.html" class="home-button">
+            🏠 Home
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTAINER
+    ========================== -->
+
+    <div class="container">
+
+
+        <!-- TRIP INFORMATION -->
+
+        <div class="trip-bar">
+
+            <div class="trip-summary">
+
+                <div class="trip-route">
+                    JFK&nbsp; ⇄ &nbsp;DXB
+                </div>
+
+                <div class="trip-info">
+                    📅 26 Nov
+                </div>
+
+                <div class="trip-info">
+                    👤 1
+                </div>
+
+                <div class="trip-info">
+                    💺 Economy
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+
+        <div class="main-layout">
+
+
+            <!-- =========================
+                 PASSENGER DETAILS
+            ========================== -->
+
+            <section class="passenger-section">
+
+                <h1 class="page-title">
+                    Passenger Details
+                </h1>
+
+                <p class="page-subtitle">
+                    Please provide accurate information for all passengers
+                </p>
+
+
+                <div class="passenger-card">
+
+                    <div class="passenger-heading">
+
+                        <h2>
+                            Passenger 1
+                        </h2>
+
+                        <span class="adult-label">
+                            ADULT
+                        </span>
+
+                    </div>
+
+
+                    <!-- TITLE / FIRST / LAST -->
+
+                    <div class="form-row three">
+
+                        <div class="form-group">
+
+                            <label>
+                                TITLE
+                            </label>
+
+                            <select>
+                                <option>Select Title</option>
+                                <option>Mr</option>
+                                <option>Mrs</option>
+                                <option>Ms</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                FIRST NAME
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="First Name">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                LAST NAME
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="Last Name">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GENDER / DOB -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                GENDER
+                            </label>
+
+                            <select>
+
+                                <option>
+                                    Select Gender
+                                </option>
+
+                                <option>
+                                    Male
+                                </option>
+
+                                <option>
+                                    Female
+                                </option>
+
+                                <option>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                DATE OF BIRTH
+                            </label>
+
+                            <input
+                                type="date">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL / PHONE -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                EMAIL
+                            </label>
+
+                            <input
+                                type="email"
+                                placeholder="Enter email address">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                PHONE (WITH COUNTRY CODE)
+                            </label>
+
+                            <input
+                                type="tel"
+                                placeholder="+1XXXXXXXXXX">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSPORT DETAILS -->
+
+                    <div class="form-row three">
+
+                        <div class="form-group">
+
+                            <label>
+                                PASSPORT NUMBER
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="Passport Number">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                PASSPORT EXPIRY DATE
+                            </label>
+
+                            <input
+                                type="date">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                PASSPORT ISSUING COUNTRY
+                            </label>
+
+                            <select>
+
+                                <option>
+                                    United States
+                                </option>
+
+                                <option>
+                                    India
+                                </option>
+
+                                <option>
+                                    United Kingdom
+                                </option>
+
+                                <option>
+                                    UAE
+                                </option>
+
+                                <option>
+                                    Canada
+                                </option>
+
+                                <option>
+                                    Vetnium
+                                </option>
+
+                                <option>
+                                    Maldivs
+                                </option>
+
+                                <option>
+                                    Swezerland
+                                </option>
+
+                                <option>
+                                    Dubai
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM BUTTON -->
+                    <a href="http://127.0.0.1:5500/seats.html">
+                    <button
+                        type="button"
+                        class="confirm-button">
+
+                        ✓ &nbsp; CONFIRM BOOKING
+
+                    </button>
+                    </a>
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 FLIGHT SUMMARY
+            ========================== -->
+
+            <aside class="summary-section">
+
+                <h2 class="summary-title">
+
+                    <span class="summary-icon">
+                        ✈
+                    </span>
+
+                    Flight Summary
+
+                </h2>
+
+
+                <!-- FLIGHT 1 -->
+
+                <div class="flight-card">
+
+                    <div class="airline">
+
+                        <span class="airline-icon">
+                            ✈
+                        </span>
+
+                        Gulf Air
+
+                    </div>
+
+
+                    <div class="flight-route">
+
+
+                        <div class="city">
+
+                            <h3>
+                                New York
+                            </h3>
+
+                            <p>
+                                Wed, Nov 26 • 11:55
+                            </p>
+
+                        </div>
+
+
+                        <div class="arrow">
+                            →
+                        </div>
+
+
+                        <div class="city right">
+
+                            <h3>
+                                BAH
+                            </h3>
+
+                            <p>
+                                Thu, Nov 27 • 08:20
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flight-duration">
+
+                        <span>
+                            ◷ 20h 25m
+                        </span>
+
+                        <span>
+                            ✈ Flight GF-90
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FLIGHT 2 -->
+
+                <div class="flight-card">
+
+                    <div class="airline">
+
+                        <span class="airline-icon">
+                            ✈
+                        </span>
+
+                        Gulf Air
+
+                    </div>
+
+
+                    <div class="flight-route">
+
+
+                        <div class="city">
+
+                            <h3>
+                                BAH
+                            </h3>
+
+                            <p>
+                                Thu, Nov 27 • 09:50
+                            </p>
+
+                        </div>
+
+
+                        <div class="arrow">
+                            →
+                        </div>
+
+
+                        <div class="city right">
+
+                            <h3>
+                                Dubai
+                            </h3>
+
+                            <p>
+                                Thu, Nov 27 • 12:10
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flight-duration">
+
+                        <span>
+                            ◷ 2h 20m
+                        </span>
+
+                        <span>
+                            ✈ Flight GF-504
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="total-box">
+
+                    <div class="total-label">
+                        TOTAL PRICE
+                    </div>
+
+                    <div class="total-price">
+                        ₹47,818
+                    </div>
+
+                    <div class="passenger-count">
+                        1 Passenger
+                    </div>
+
+                </div>
+
+
+                <div class="secure-note">
+
+                    🔒 <span>Secure booking</span> &nbsp; • &nbsp;
+                    Your information is protected
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
